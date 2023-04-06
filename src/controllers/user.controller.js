@@ -19,11 +19,14 @@ async function register(req, res) {
     const newUser = await userService.registerUser(displayName, email, password, image);
 
     const token = jwt
-      .sign({ newUser }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '7d' });
+      .sign({ newUser }, process.env.JWT_SECRET, {
+        algorithm: 'HS256',
+        expiresIn: '7d',
+      });
 
-    res.status(201).json({ token });
+    res.status(statusCode.SUCCESFULLY_CREATED).json({ token });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
   }
 }
 
