@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@hapi/boom": "10.0.1",
+    "bcrypt": "^5.1.0",
     "cr-ent": "^1.0.1",
+    "dcrypt": "^0.0.2",
     "express": "4.17.1",
     "gf-express-msc": "^1.0.7",
     "joi": "17.6.0",

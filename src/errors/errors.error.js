@@ -5,6 +5,11 @@ const statusCode = {
   SUCCESFULLY_CREATED: 201,
 };
 
+const errorMessages = {
+  ERROR_HASHING_PASSWORD: 'Error hashing password',
+};
+
 module.exports = {
   statusCode,
+  errorMessages,
 };
