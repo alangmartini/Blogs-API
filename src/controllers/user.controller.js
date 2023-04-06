@@ -30,6 +30,36 @@ async function register(req, res) {
   }
 }
 
+async function getAll(req, res) {
+  try {
+    const users = await userService.getAll();
+
+    res.status(statusCode.SUCCESS).json(users);
+  } catch (error) {
+    res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
+  }
+}
+
+async function getById(req, res) {
+  const { id } = req.params;
+
+  try {
+    const user = await userService.getById(id);
+
+    if (!user) {
+      return res
+        .status(statusCode.NOT_FOUND)
+        .json({ message: errorMessages.USER_NOT_FOUND });
+    }
+
+    res.status(statusCode.SUCCESS).json(user);
+  } catch (error) {
+    res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
+  }
+}
+
 module.exports = {
   register,
+  getAll,
+  getById,
 };

@@ -4,6 +4,7 @@ const statusCode = {
   INTERNAL_ERROR: 500,
   SUCCESFULLY_CREATED: 201,
   ALREADY_REGISTERED: 409,
+  NOT_FOUND: 404,
 };
 
 const errorMessages = {
@@ -14,6 +15,7 @@ const errorMessages = {
   INVALID_TOKEN: 'Expired or invalid token',
   INTERNAL_ERROR: 'Internal error',
   ALREADY_REGISTERED: 'User already registered',
+  USER_NOT_FOUND: 'User does not exist',
 };
 
 module.exports = {

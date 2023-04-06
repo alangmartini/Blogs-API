@@ -21,4 +21,6 @@ function tokenAuth(req, res, next) {
   }
 }
 
-module.exports = tokenAuth;
+module.exports = { 
+  tokenAuth,
+};
