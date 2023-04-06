@@ -1,5 +1,4 @@
 /* eslint-disable max-lines-per-function */
-'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,7 +11,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
-      name: {
+      display_name: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -20,6 +19,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -32,12 +35,7 @@ module.exports = {
     });
       },
 
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('users');
   }
 };
