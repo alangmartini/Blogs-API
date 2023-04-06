@@ -69,8 +69,8 @@ const searchPost = async (parameter) => {
         const posts = await models.BlogPost.findAll({
             where: {
                 [models.Sequelize.Op.or]: [
-                    { title: { [models.Sequelize.Op.iLike]: `%${parameter}%` } },
-                    { content: { [models.Sequelize.Op.iLike]: `%${parameter}%` } },
+                    { title: { [models.Sequelize.Op.like]: `%${parameter}%` } },
+                    { content: { [models.Sequelize.Op.like]: `%${parameter}%` } },
                 ],
             },
             include: [

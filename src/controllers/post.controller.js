@@ -88,6 +88,7 @@ const deletePost = async (req, res) => {
 };
 
 const searchPost = async (req, res) => {
+    console.log('req.body is:', req.body);
     const { q } = req.query;
 
     try {

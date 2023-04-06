@@ -5,17 +5,10 @@ const { validatePost, validateUpdatePost } = require('../middleware/post.middlew
 
 const router = express.Router();
 
-router.post(
-    '/', 
-    tokenAuth,
-    validatePost,
-    postController.createPost,
-);
-
 router.get(
-    '/',
+    '/search',
     tokenAuth,
-    postController.getAllPosts,
+    postController.searchPost,
 );
 
 router.get(
@@ -24,17 +17,24 @@ router.get(
     postController.getPostById,
 );
 
+router.get(
+    '/',
+    tokenAuth,
+    postController.getAllPosts,
+);
+
+router.post(
+    '/', 
+    tokenAuth,
+    validatePost,
+    postController.createPost,
+);
+
 router.put(
     '/:id',
     tokenAuth,
     validateUpdatePost,
     postController.updatePostById,
-);
-
-router.get(
-    '/search',
-    tokenAuth,
-    postController.searchPost,
 );
 
 router.delete(
