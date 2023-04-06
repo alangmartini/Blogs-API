@@ -11,6 +11,17 @@ async function createCategory(name) {
   }
 }
 
+async function getAllCategories() {
+  try {
+    const categories = await Category.findAll();
+
+    return categories;
+  } catch (error) {
+    return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+  }
+}
+
 module.exports = {
   createCategory,
+  getAllCategories,
 };

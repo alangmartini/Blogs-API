@@ -5,6 +5,7 @@ const statusCode = {
   SUCCESFULLY_CREATED: 201,
   ALREADY_REGISTERED: 409,
   NOT_FOUND: 404,
+  SUCESS: 200,
 };
 
 const errorMessages = {

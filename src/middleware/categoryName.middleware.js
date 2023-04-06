@@ -11,4 +11,6 @@ const categoryNameMiddleware = (req, res, next) => {
   next();
 };
 
-module.exports = categoryNameMiddleware;
+module.exports = {
+  categoryNameMiddleware,
+};
