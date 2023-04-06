@@ -1,3 +1,4 @@
+const { statusCode } = require('../errors/errors.error');
 const categoryService = require('../services');
 
 const registerCategory = async (req, res) => {
@@ -6,9 +7,9 @@ const registerCategory = async (req, res) => {
 
       const newCategory = await categoryService.createCategory(name);
 
-      res.status(201).json(newCategory);
+      res.status(statusCode.SUCCESFULLY_CREATED).json(newCategory);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(statusCode.INTERNAL_ERROR).json({ message: err.message });
     }
   };
 
