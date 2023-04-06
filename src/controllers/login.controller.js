@@ -24,7 +24,7 @@ const logIn = async (req, res) => {
     return res.status(INVALID_REQUEST).json({ message: errorMessages.INVALID_FIELDS });
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
   // Return token
   return res.json({ token });

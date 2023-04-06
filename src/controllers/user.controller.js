@@ -1,14 +1,13 @@
 const jwt = require('jsonwebtoken');
 const { statusCode, errorMessages } = require('../errors/errors.error');
-const userService = require('../services/user.service');
-const models = require('../models');
+const { userService } = require('../services');
 
 // Controller function to register a new user
 async function register(req, res) {
   const { displayName, email, password, image } = req.body;
 
   try {
-    const userExists = await models.User.findOne({ email });
+    const userExists = await userService.findByEmail(email);
     
     if (userExists) {
       return res
