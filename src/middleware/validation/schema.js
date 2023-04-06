@@ -34,8 +34,12 @@ const postSchema = Joi.object({
 });
 
 const updatePostSchema = Joi.object({
-  title: Joi.string().required(),
-  content: Joi.string().required(),
+  title: Joi.string().required().message({
+    'any.required': errorMessages.FIELDS_REQUIRED,
+  }),
+  content: Joi.string().required().message({
+    'any.required': errorMessages.FIELDS_REQUIRED,
+  }),
 });
 
 module.exports = {
