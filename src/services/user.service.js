@@ -55,6 +55,7 @@ const getAll = async () => {
 };
 
 const deleteMe = async (userId) => {
+  console.log('userId is:', userId);
   const user = await getById(userId);
 
   if (!user || user.id !== userId) {
@@ -67,7 +68,7 @@ const deleteMe = async (userId) => {
   }
 
   try {
-    await models.User.destroy({ where: { userId } });
+    await models.User.destroy({ where: { id: userId } });
 
     return true;
   } catch (error) {

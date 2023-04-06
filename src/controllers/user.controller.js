@@ -61,7 +61,7 @@ async function deleteMe(req, res) {
   const { user } = req;
 
   try {
-    const deletedUser = await userService.deleteMe(user.id);
+    const deletedUser = await userService.deleteMe(user.user.id);
 
     if (deletedUser.statusCode) {
       const error = deletedUser;
