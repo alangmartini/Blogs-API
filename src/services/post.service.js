@@ -22,7 +22,12 @@ const createService = async (title, content, categoryIds) => {
 
 const getAllPosts = async () => {
     try {
-        const posts = await models.BlogPost.findAll();
+        const posts = await models.BlogPost.findAll({
+            include: [
+                { model: models.User, exclude: ['password'] },
+                { model: models.Category, through: { attributes: [] } },
+            ],
+        });
 
         return posts;
     } catch (error) {
