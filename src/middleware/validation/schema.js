@@ -10,6 +10,14 @@ const loginSchema = Joi.object({
   }),
 });
 
+const registerUserSchema = Joi.object({
+  displayName: Joi.string().required(),
+  email: Joi.string().email().min(8).required(),
+  password: Joi.string().min(6).required(),
+  image: Joi.string(),
+});
+
 module.exports = {
   loginSchema,
+  registerUserSchema,
 };
