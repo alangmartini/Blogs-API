@@ -56,7 +56,7 @@ const updatePostById = async (req, res) => {
     const { title, content } = req.body;
     const { user } = req;
     try {
-        const updatedPost = await postService.updatePostById(id, title, content, user);
+        const updatedPost = await postService.updatePostById(id, title, content, user.user);
 
         if (updatedPost.statusCode) {
             const error = updatedPost;
@@ -74,7 +74,7 @@ const deletePost = async (req, res) => {
     const { user } = req;
 
     try {
-        const deletedPost = await postService.deletePostById(id, user);
+        const deletedPost = await postService.deletePostById(id, user.user);
 
         if (deletedPost.statusCode) {
             const error = deletedPost;

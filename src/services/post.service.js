@@ -95,6 +95,8 @@ const handleError = (post, user) => {
     }
 
     if (post.userId !== user.id) {
+        console.log('user.id is:', user.id);
+        console.log('userId is:', post.userId);
         const error = new Error(errorMessages.UNAUTHORIZED);
         error.statusCode = statusCode.UNAUTHORIZED;
 
@@ -105,10 +107,11 @@ const handleError = (post, user) => {
 };
 
 const updatePostById = async (id, title, content, user) => {
+    console.log('user is:', user);
     try {
         const post = await models.BlogPost.findByPk(id, { include: [
-                    { model: models.User, attributes: { exclude: ['password'] } },
-                    { model: models.Category, through: { attributes: [] } },
+                    { model: models.User, as: 'user', attributes: { exclude: ['password'] } },
+                    { model: models.Category, as: 'categories', through: { attributes: [] } },
                 ],
             });
 

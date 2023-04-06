@@ -34,13 +34,9 @@ const postSchema = Joi.object({
 }).messages(messagesFieldsRequired);
 
 const updatePostSchema = Joi.object({
-  title: Joi.string().required().messages({
-    'string.required': errorMessages.FIELDS_REQUIRED,
-  }),
-  content: Joi.string().required().messages({
-    'string.required': errorMessages.FIELDS_REQUIRED,
-  }),
-});
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+}).messages(messagesFieldsRequired);
 
 module.exports = {
   loginSchema,
