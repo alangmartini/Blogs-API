@@ -17,6 +17,11 @@ router.get(
   userController.getUsers,
 );
 
+router.get(
+  '/:id',
+  tokenAuth,
+  userController.getById,
+);
 router.delete(
   '/me',
   tokenAuth,

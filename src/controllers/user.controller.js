@@ -51,7 +51,7 @@ async function getById(req, res) {
         .json({ message: errorMessages.USER_NOT_FOUND });
     }
 
-    res.status(statusCode.SUCCESS).json(user);
+    res.status(statusCode.SUCESS).json(user);
   } catch (error) {
     res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
   }
