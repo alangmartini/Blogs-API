@@ -30,7 +30,32 @@ const getAllPosts = async () => {
     }
 };
 
+const getPostById = async (id) => {
+    try {
+        const post = await models.BlogPost.findByPk(
+            id,
+            { include: [
+                    { models: models.User, exclude: ['password'] },
+                    { models: models.Category, through: { attributes: [] } },
+                ],
+            },
+        );
+
+        if (!post) {
+            const error = new Error(errorMessages.POST_NOT_FOUND);
+            error.statusCode = statusCode.NOT_FOUND;
+
+            return error;
+        }
+
+        return post;
+    } catch (error) {
+        return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+    }
+};
+
 module.exports = { 
     createService,
     getAllPosts,
+    getPostById,
 };

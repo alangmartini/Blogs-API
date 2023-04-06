@@ -18,6 +18,7 @@ const errorMessages = {
   ALREADY_REGISTERED: 'User already registered',
   USER_NOT_FOUND: 'User does not exist',
   CATEGORY_ID_NOT_FOUND: 'one or more "categoryIds" not found',
+  POST_NOT_FOUND: 'Post does not exist',
 };
 
 module.exports = {
