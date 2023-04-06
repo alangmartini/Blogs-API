@@ -59,8 +59,50 @@ const getPostById = async (id) => {
     }
 };
 
+const handleError = (post, user) => {
+    if (!post) {
+        const error = new Error();
+        error.message = errorMessages.POST_NOT_FOUND;
+        error.statusCode = statusCode.NOT_FOUND;
+
+        return error;
+    }
+
+    if (post.userId !== user.id) {
+        const error = new Error(errorMessages.UNAUTHORIZED);
+        error.statusCode = statusCode.INVALID_REQUEST;
+
+        return error;
+    }
+
+    return null;
+};
+
+const updatePostById = async (id, title, content, user) => {
+    try {
+        const post = await models.BlogPost.findByPk(id, { include: [
+                    { model: models.User, exclude: ['password'] },
+                    { model: models.Category, through: { attributes: [] } },
+                ],
+            });
+
+        const error = handleError(post, user);
+
+        if (error) {
+            return error;
+        }
+
+        await post.update({ title, content });
+
+        return post;
+    } catch (error) {
+        return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+    }
+};
+
 module.exports = { 
     createService,
     getAllPosts,
     getPostById,
+    updatePostById,
 };

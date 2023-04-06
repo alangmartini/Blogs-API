@@ -53,9 +53,9 @@ const getPostById = async (req, res) => {
 const updatePostById = async (req, res) => {
     const { id } = req.params;
     const { title, content } = req.body;
-
+    const { user } = req;
     try {
-        const updatedPost = await postService.updateService(id, title, content);
+        const updatedPost = await postService.updateService(id, title, content, user);
 
         if (updatedPost.statusCode) {
             const error = updatedPost;

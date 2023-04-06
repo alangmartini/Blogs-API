@@ -19,6 +19,7 @@ const errorMessages = {
   USER_NOT_FOUND: 'User does not exist',
   CATEGORY_ID_NOT_FOUND: 'one or more "categoryIds" not found',
   POST_NOT_FOUND: 'Post does not exist',
+  UNAUTHORIZED: 'Unauthorized user',
 };
 
 module.exports = {
