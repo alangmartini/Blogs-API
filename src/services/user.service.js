@@ -1,3 +1,4 @@
+const { statusCode, errorMessages } = require('../errors/errors.error');
 const models = require('../models');
 
 const findByEmail = async (email) => {
@@ -11,12 +12,24 @@ const findByEmail = async (email) => {
 };
 
 const registerUser = async (displayName, email, password, image) => {
+  const userExists = await findByEmail(email);
+  
+  if (userExists) {
+    const error = {
+      statusCode: statusCode.ALREADY_REGISTERED,
+      message: errorMessages.ALREADY_REGISTERED,
+
+    };
+
+    return error;
+  }
+
   try {
     const user = await models.User.create({ displayName, email, password, image });
 
     return user;
   } catch (error) {
-    throw new Error(error);
+    return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
   }
 };
 

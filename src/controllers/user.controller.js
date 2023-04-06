@@ -8,16 +8,15 @@ async function register(req, res) {
   const { displayName, email, password, image } = req.body;
 
   try {
-    const userExists = await userService.findByEmail(email);
-    
-    if (userExists) {
-      return res
-      .status(statusCode.ALREADY_REGISTERED)
-      .send({ message: errorMessages.ALREADY_REGISTERED });
-    }
-    
     const newUser = await userService.registerUser(displayName, email, password, image);
 
+    if (newUser.statusCode) {
+      const error = new Error(newUser.message);
+      error.statusCode = newUser.statusCode;
+
+      throw error;
+    }
+    
     const token = jwt
       .sign({ newUser }, jwtSecret, {
         algorithm: 'HS256',
@@ -26,7 +25,7 @@ async function register(req, res) {
 
     res.status(statusCode.SUCCESFULLY_CREATED).json({ token });
   } catch (error) {
-    res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
+    res.status(error.statusCode).json({ message: error.message });
   }
 }
 

@@ -5,4 +5,5 @@ const categoryController = require('./category.controller');
 module.exports = {
   loginController,
   userController,
+  categoryController,
 };
