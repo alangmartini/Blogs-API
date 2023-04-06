@@ -45,7 +45,7 @@ const getPostById = async (id) => {
         const post = await models.BlogPost.findByPk(
             id,
             { include: [
-                    { models: models.User, exclude: ['password'] },
+                    { models: models.User, attributes: { exclude: ['password'] } },
                     { models: models.Category, through: { attributes: [] } },
                 ],
             },
@@ -74,7 +74,7 @@ const searchPost = async (parameter) => {
                 ],
             },
             include: [
-                { model: models.User, exclude: ['password'] },
+                { model: models.User, attributes: { exclude: ['password'] } },
                 { model: models.Category, through: { attributes: [] } },
             ],
         });
@@ -107,7 +107,7 @@ const handleError = (post, user) => {
 const updatePostById = async (id, title, content, user) => {
     try {
         const post = await models.BlogPost.findByPk(id, { include: [
-                    { model: models.User, exclude: ['password'] },
+                    { model: models.User, attributes: { exclude: ['password'] } },
                     { model: models.Category, through: { attributes: [] } },
                 ],
             });
