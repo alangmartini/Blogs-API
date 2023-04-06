@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { NO_TOKEN, errorMessages } = require('../errors/errors.error');
+const { statusCode, errorMessages } = require('../errors/errors.error');
 
 const jwtSecret = process.env.JWT_SECRET || 'cool_secret';
 
@@ -7,7 +7,7 @@ function tokenAuth(req, res, next) {
   const token = req.header('Authorization');
 
   if (!token) {
-    return res.status(NO_TOKEN).json({ message: errorMessages.NO_TOKEN });
+    return res.status(statusCode.NO_TOKEN).json({ message: errorMessages.NO_TOKEN });
   }
 
   try {
@@ -17,7 +17,7 @@ function tokenAuth(req, res, next) {
 
     next();
   } catch (error) {
-    return res.status(NO_TOKEN).json({ message: errorMessages.INVALID_TOKEN });
+    return res.status(statusCode.NO_TOKEN).json({ message: errorMessages.INVALID_TOKEN });
   }
 }
 

@@ -33,7 +33,7 @@ async function getUsers(_req, res) {
   try {
     const users = await userService.getAll();
 
-    res.status(statusCode.SUCCESS).json(users);
+    res.status(statusCode.SUCESS).json(users);
   } catch (error) {
     res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
   }

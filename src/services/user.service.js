@@ -3,7 +3,8 @@ const models = require('../models');
 
 const findByEmail = async (email) => {
   try {
-    const user = await models.User.findOne({ where: { email } });
+    const user = await models.User
+      .findOne({ where: { email } }, { attributes: { exclude: ['password'] } });
 
     return user;
   } catch (error) {
@@ -35,7 +36,7 @@ const registerUser = async (displayName, email, password, image) => {
 
 const getById = async (id) => {
   try {
-    const user = await models.User.findByPk(id);
+    const user = await models.User.findByPk(id, { attributes: { exclude: ['password'] } });
 
     return user;
   } catch (error) {
@@ -45,7 +46,7 @@ const getById = async (id) => {
 
 const getAll = async () => {
   try {
-    const users = await models.User.findAll();
+    const users = await models.User.findAll({ attributes: { exclude: ['password'] } });
 
     return users;
   } catch (error) {
