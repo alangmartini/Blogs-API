@@ -45,8 +45,8 @@ const getPostById = async (id) => {
         const post = await models.BlogPost.findByPk(
             id,
             { include: [
-                    { models: models.User, attributes: { exclude: ['password'] } },
-                    { models: models.Category, through: { attributes: [] } },
+                    { model: models.User, as: 'user', attributes: { exclude: ['password'] } },
+                    { model: models.Category, as: 'categories', through: { attributes: [] } },
                 ],
             },
         );
@@ -74,8 +74,8 @@ const searchPost = async (parameter) => {
                 ],
             },
             include: [
-                { model: models.User, attributes: { exclude: ['password'] } },
-                { model: models.Category, through: { attributes: [] } },
+                { model: models.User, as: 'user', attributes: { exclude: ['password'] } },
+                { model: models.Category, as: 'categories', through: { attributes: [] } },
             ],
         });
 
