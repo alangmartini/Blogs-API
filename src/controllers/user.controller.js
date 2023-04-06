@@ -30,7 +30,7 @@ async function register(req, res) {
   }
 }
 
-async function getAll(req, res) {
+async function getUsers(req, res) {
   try {
     const users = await userService.getAll();
 
@@ -60,6 +60,6 @@ async function getById(req, res) {
 
 module.exports = {
   register,
-  getAll,
+  getUsers,
   getById,
 };
