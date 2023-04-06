@@ -1,27 +1,27 @@
 /* eslint-disable max-lines-per-function */
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, dataTypes) => {
   const User = sequelize.define('User', {
     id: {
-      type: DataTypes.INTEGER,
+      type: dataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     displayName: {
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
       allowNull: false,
       field: 'display_name',
     },
     email: {
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     password: {
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING,
+      type: dataTypes.STRING,
       allowNull: true,
     },
   }, {
@@ -33,4 +33,6 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
       User.hasMany(models.BlogPosts, { foreignKey: 'user_id', as: 'blogPosts' });
     };
+  
+  return User;
 };
