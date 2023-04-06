@@ -1,0 +1,25 @@
+const models = require('../models');
+const { statusCode, errorMessages } = require('../errors/errors.error');
+
+const createService = async (title, content, categoryIds) => {
+    try {
+        const categories = await models.Category.findAll({ where: { id: categoryIds } });
+        
+        if (categories.length !== categoryIds.length) {
+            const error = new Error(errorMessages.CATEGORY_ID_NOT_FOUND);
+            error.statusCode = statusCode.NOT_FOUND;
+
+            return error;
+        }
+        
+        const post = await models.BlogPost.create({ title, content });
+
+        return post;
+    } catch (error) {
+        return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+    }
+};
+
+module.exports = { 
+    createService,
+};
