@@ -31,4 +31,10 @@ router.put(
     postController.updatePostById,
 );
 
+router.get(
+    '/search',
+    tokenAuth,
+    postController.searchPost,
+);
+
 module.exports = router;

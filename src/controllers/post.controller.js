@@ -71,7 +71,7 @@ const updatePostById = async (req, res) => {
 const deletePost = async (req, res) => {
     const { id } = req.params;
     const { user } = req;
-    
+
     try {
         const deletedPost = await postService.deletePostById(id, user);
 
@@ -81,6 +81,23 @@ const deletePost = async (req, res) => {
         }
 
         return res.status(statusCode.DELETED).json();
+    } catch (error) {
+        return res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
+    }
+};
+
+const searchPost = async (req, res) => {
+    const { q } = req.query;
+
+    try {
+        const posts = await postService.searchPost(q);
+
+        if (posts.statusCode) {
+            const error = posts;
+            res.status(error.statusCode).json({ message: error.message });
+        }
+
+        return res.status(statusCode.SUCESS).json(posts);
     } catch (error) {
         return res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
     }

@@ -59,6 +59,27 @@ const getPostById = async (id) => {
     }
 };
 
+const searchPost = async (parameter) => {
+    try {
+        const posts = await models.BlogPost.findAll({
+            where: {
+                [models.Sequelize.Op.or]: [
+                    { title: { [models.Sequelize.Op.iLike]: `%${parameter}%` } },
+                    { content: { [models.Sequelize.Op.iLike]: `%${parameter}%` } },
+                ],
+            },
+            include: [
+                { model: models.User, exclude: ['password'] },
+                { model: models.Category, through: { attributes: [] } },
+            ],
+        });
+
+        return posts;
+    } catch (error) {
+        return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+    }
+};
+
 const handleError = (post, user) => {
     if (!post) {
         const error = new Error();
