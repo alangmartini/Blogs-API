@@ -9,7 +9,9 @@ const errorMessages = {
   ERROR_HASHING_PASSWORD: 'Error hashing password',
   FIELDS_REQUIRED: 'Some required fields are missing',
   INVALID_FIELDS: 'Invalid fields',
-  
+  NO_TOKEN: 'Token not found',
+  INVALID_TOKEN: 'Expired or invalid token',
+
 };
 
 module.exports = {
