@@ -1,11 +1,18 @@
 const jwt = require('jsonwebtoken');
 const { userService } = require('../services');
-const { errorMessages, statusCode: { INVALID_REQUEST } } = require('../errors/errors.error');
+const { 
+  errorMessages,
+  statusCode: { INVALID_REQUEST, INTERNAL_ERROR } } = require('../errors/errors.error');
 
 const logIn = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await userService.findByEmail({ email });
+  let user;
+  try {
+    user = await userService.findByEmail(email);
+  } catch (e) {
+    return res.status(INTERNAL_ERROR).json({ message: e.message });
+  }
 
   if (!user) {
     return res.status(INVALID_REQUEST).json({ message: errorMessages.INVALID_FIELDS });

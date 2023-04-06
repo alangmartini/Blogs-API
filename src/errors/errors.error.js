@@ -11,7 +11,7 @@ const errorMessages = {
   INVALID_FIELDS: 'Invalid fields',
   NO_TOKEN: 'Token not found',
   INVALID_TOKEN: 'Expired or invalid token',
-
+  INTERNAL_ERROR: 'Internal error',
 };
 
 module.exports = {
