@@ -2,13 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => queryInterface.createTable('posts_categories', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER,
-    },
-    postIdd: {
+    postId: {
       type: Sequelize.INTEGER,
       field: 'post_id',
       references: {
