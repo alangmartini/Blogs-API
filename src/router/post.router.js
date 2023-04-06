@@ -37,4 +37,10 @@ router.get(
     postController.searchPost,
 );
 
+router.delete(
+    '/:id',
+    tokenAuth,
+    postController.deletePost,
+);
+
 module.exports = router;
