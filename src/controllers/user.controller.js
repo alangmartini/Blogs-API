@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const { statusCode, errorMessages } = require('../errors/errors.error');
 const { userService } = require('../services');
 
-// Controller function to register a new user
+const jwtSecret = process.env.JWT_SECRET || 'cool_secret';
+
 async function register(req, res) {
   const { displayName, email, password, image } = req.body;
 
@@ -18,7 +19,7 @@ async function register(req, res) {
     const newUser = await userService.registerUser(displayName, email, password, image);
 
     const token = jwt
-      .sign({ newUser }, process.env.JWT_SECRET, {
+      .sign({ newUser }, jwtSecret, {
         algorithm: 'HS256',
         expiresIn: '7d',
       });

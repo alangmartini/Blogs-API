@@ -4,6 +4,8 @@ const {
   errorMessages,
   statusCode: { INVALID_REQUEST, INTERNAL_ERROR } } = require('../errors/errors.error');
 
+const jwtSecret = process.env.JWT_SECRET || 'cool_secret';
+
 const logIn = async (req, res) => {
   const { email, password } = req.body;
 
@@ -24,7 +26,7 @@ const logIn = async (req, res) => {
     return res.status(INVALID_REQUEST).json({ message: errorMessages.INVALID_FIELDS });
   }
 
-  const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ user }, jwtSecret, { expiresIn: '1d' });
 
   // Return token
   return res.json({ token });
