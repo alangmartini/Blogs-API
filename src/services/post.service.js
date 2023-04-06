@@ -20,6 +20,17 @@ const createService = async (title, content, categoryIds) => {
     }
 };
 
+const getAllPosts = async () => {
+    try {
+        const posts = await models.BlogPost.findAll();
+
+        return posts;
+    } catch (error) {
+        return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+    }
+};
+
 module.exports = { 
     createService,
+    getAllPosts,
 };

@@ -18,4 +18,22 @@ const createPost = async (req, res) => {
     }
 };
 
-module.exports = createPost;
+const getAllPosts = async (req, res) => {
+    try {
+        const posts = await postService.getAllService();
+
+        if (posts.statusCode) {
+            const error = posts;
+            res.status(error.statusCode).json({ message: error.message });
+        }
+
+        return res.status(statusCode.SUCESS).json(posts);
+    } catch (error) {
+        return res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
+    }
+};
+
+module.exports = {
+    createPost,
+    getAllPosts,
+};
