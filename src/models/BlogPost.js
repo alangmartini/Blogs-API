@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 module.exports = (sequelize, DataTypes) => {
-  const BlogPost = sequelize.define({
+  const BlogPost = sequelize.define('BlogPost', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'user_id'
     },
     published: {
       type: DataTypes.DATE,

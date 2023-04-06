@@ -1,5 +1,5 @@
 const express = require('express');
-const categoryController = require('../controllers');
+const { categoryController } = require('../controllers');
 const { tokenAuth } = require('../auth/tokenAuth.middleware');
 const { categoryNameMiddleware } = require('../middleware/categoryName.middleware');
 
