@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const { userService } = require('../services');
-const { loginRouter } = require('../router');
-const { errorMessages } = require('../errors/errors.error');
+const { errorMessages, statusCode: { INVALID_REQUEST } } = require('../errors/errors.error');
 
 const logIn = async (req, res) => {
   const { email, password } = req.body;
@@ -10,16 +8,16 @@ const logIn = async (req, res) => {
   const user = await userService.findByEmail({ email });
 
   if (!user) {
-    return res.status(404).json({ message: errorMessages.FIELDS_REQUIRED });
+    return res.status(INVALID_REQUEST).json({ message: errorMessages.INVALID_FIELDS });
   }
 
   const isMatch = password === user.password;
 
   if (!isMatch) {
-    return res.status(401).json({ message: errorMessages.INVALID_FIELDS });
+    return res.status(INVALID_REQUEST).json({ message: errorMessages.INVALID_FIELDS });
   }
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
   // Return token
   return res.json({ token });
