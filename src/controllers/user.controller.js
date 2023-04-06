@@ -29,7 +29,7 @@ async function register(req, res) {
   }
 }
 
-async function getUsers(req, res) {
+async function getUsers(_req, res) {
   try {
     const users = await userService.getAll();
 
@@ -57,8 +57,28 @@ async function getById(req, res) {
   }
 }
 
+async function deleteMe(req, res) {
+  const { user } = req;
+
+  try {
+    const deletedUser = await userService.deleteMe(user.id);
+
+    if (deletedUser.statusCode) {
+      const error = deletedUser;
+      return res
+        .status(error.statusCode)
+        .json({ message: error.message });
+    }
+
+    res.status(statusCode.DELETED).json();
+  } catch (error) {
+    res.status(statusCode.INTERNAL_ERROR).json({ message: error.message });
+  }
+}
+
 module.exports = {
   register,
   getUsers,
   getById,
+  deleteMe,
 };

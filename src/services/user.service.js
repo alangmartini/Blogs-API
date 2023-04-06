@@ -53,9 +53,31 @@ const getAll = async () => {
   }
 };
 
+const deleteMe = async (userId) => {
+  const user = await getById(userId);
+
+  if (!user || user.id !== userId) {
+    const error = {
+      statusCode: statusCode.NOT_FOUND,
+      message: errorMessages.NOT_FOUND,
+    };
+
+    return error;
+  }
+
+  try {
+    await models.User.destroy({ where: { userId } });
+
+    return true;
+  } catch (error) {
+    return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+  }
+};
+
 module.exports = {
   findByEmail,
   registerUser,
   getById,
   getAll,
+  deleteMe,
 };

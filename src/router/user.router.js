@@ -13,4 +13,11 @@ router.get(
 );
 
 router.get('/:id', userController.getAll);
+
+router.delete(
+  '/me',
+  tokenAuth,
+  userController.deleteMe,
+);
+
 module.exports = router;
