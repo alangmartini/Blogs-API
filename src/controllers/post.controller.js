@@ -109,4 +109,5 @@ module.exports = {
     getPostById,
     updatePostById,
     deletePost,
+    searchPost,
 };
