@@ -1,18 +1,23 @@
 const models = require('../models');
 const { statusCode, errorMessages } = require('../errors/errors.error');
 
-const createService = async (title, content, categoryIds) => {
+const createService = async (title, content, categoryIds, user) => {
     try {
         const categories = await models.Category.findAll({ where: { id: categoryIds } });
         
         if (categories.length !== categoryIds.length) {
             const error = new Error(errorMessages.CATEGORY_ID_NOT_FOUND);
-            error.statusCode = statusCode.NOT_FOUND;
+            error.statusCode = statusCode.INVALID_REQUEST;
 
             return error;
         }
         
-        const post = await models.BlogPost.create({ title, content });
+        const post = await models.BlogPost.create({ title, content, userId: user.id });
+
+        const postCategories = categoryIds
+            .map((categoryId) => ({ categoryId, postId: post.id }));
+
+        await models.PostCategory.bulkCreate(postCategories);
 
         return post;
     } catch (error) {

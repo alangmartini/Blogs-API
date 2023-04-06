@@ -1,15 +1,16 @@
 const { statusCode } = require('../errors/errors.error');
-const postService = require('../services');
+const { postService } = require('../services');
 
 const createPost = async (req, res) => {
     const { title, content, categoryIds } = req.body;
+    const { user } = req;
 
     try {
-        const post = await postService.createService(title, content, categoryIds);
+        const post = await postService.createService(title, content, categoryIds, user.user);
 
         if (post.statusCode) {
             const error = post;
-            res.status(error.statusCode).json({ message: error.message });
+            return res.status(error.statusCode).json({ message: error.message });
         }
 
         return res.status(statusCode.SUCCESFULLY_CREATED).json(post);
@@ -24,7 +25,7 @@ const getAllPosts = async (req, res) => {
 
         if (posts.statusCode) {
             const error = posts;
-            res.status(error.statusCode).json({ message: error.message });
+            return res.status(error.statusCode).json({ message: error.message });
         }
 
         return res.status(statusCode.SUCESS).json(posts);
@@ -41,7 +42,7 @@ const getPostById = async (req, res) => {
 
         if (post.statusCode) {
             const error = post;
-            res.status(error.statusCode).json({ message: error.message });
+            return res.status(error.statusCode).json({ message: error.message });
         }
 
         return res.status(statusCode.SUCESS).json(post);
@@ -59,7 +60,7 @@ const updatePostById = async (req, res) => {
 
         if (updatedPost.statusCode) {
             const error = updatedPost;
-            res.status(error.statusCode).json({ message: error.message });
+            return res.status(error.statusCode).json({ message: error.message });
         }
 
         return res.status(statusCode.SUCESS).json(updatedPost);
@@ -77,7 +78,7 @@ const deletePost = async (req, res) => {
 
         if (deletedPost.statusCode) {
             const error = deletedPost;
-            res.status(error.statusCode).json({ message: error.message });
+            return res.status(error.statusCode).json({ message: error.message });
         }
 
         return res.status(statusCode.DELETED).json();
@@ -94,7 +95,7 @@ const searchPost = async (req, res) => {
 
         if (posts.statusCode) {
             const error = posts;
-            res.status(error.statusCode).json({ message: error.message });
+            return res.status(error.statusCode).json({ message: error.message });
         }
 
         return res.status(statusCode.SUCESS).json(posts);

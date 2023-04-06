@@ -28,17 +28,10 @@ const categoryRegisterSchema = Joi.object({
 }).required();
 
 const postSchema = Joi.object({
-  title: Joi.string().required().messages({
-    'any.required': errorMessages.FIELDS_REQUIRED,
-  }),
-  content: Joi.string().required().messages({
-    'any.required': errorMessages.FIELDS_REQUIRED,
-  }),
-  categoryIds: Joi.array().items(Joi.string()).required().messages({
-    'any.required': errorMessages.FIELDS_REQUIRED,
-    'object.base': errorMessages.FIELDS_REQUIRED,
-  }),
-});
+  title: Joi.string().required(), 
+  content: Joi.string().required(),
+  categoryIds: Joi.array().items(Joi.number()).required(),
+}).messages(messagesFieldsRequired);
 
 const updatePostSchema = Joi.object({
   title: Joi.string().required().messages({
