@@ -1,5 +1,5 @@
 const { statusCode } = require('../errors/errors.error');
-const categoryService = require('../services');
+const { categoryService } = require('../services');
 
 const registerCategory = async (req, res) => {
   const { name } = req.body;
@@ -8,7 +8,7 @@ const registerCategory = async (req, res) => {
 
   if (newCategory.statusCode) {
     const error = newCategory;
-    res.status(error.statusCode).json({ message: error.message });
+    return res.status(error.statusCode).json({ message: error.message });
   }
 
   res.status(statusCode.SUCCESFULLY_CREATED).json(newCategory);
@@ -19,10 +19,10 @@ const getAllCategories = async (req, res) => {
 
   if (categories.statusCode) {
     const error = categories;
-    res.status(error.statusCode).json({ message: error.message });
+    return res.status(error.statusCode).json({ message: error.message });
   }
 
-  res.status(statusCode.SUCCESS).json(categories);
+  res.status(statusCode.SUCESS).json(categories);
 };
 
 module.exports = {

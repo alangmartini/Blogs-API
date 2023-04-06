@@ -25,7 +25,7 @@ const registerUserSchema = Joi.object({
 
 const categoryRegisterSchema = Joi.object({
   name: Joi.string().required(),
-});
+}).required();
 
 const postSchema = Joi.object({
   title: Joi.string().required().messages({

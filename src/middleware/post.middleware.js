@@ -7,7 +7,7 @@ const validatePost = (req, res, next) => {
   if (error) {
     return res
         .status(statusCode.INVALID_REQUEST)
-        .json({ error: error.details[0].message });
+        .json({ message: error.details[0].message });
   }
 
   next();
@@ -19,7 +19,7 @@ const validateUpdatePost = (req, res, next) => {
   if (error) {
     return res
         .status(statusCode.INVALID_REQUEST)
-        .json({ error: error.details[0].message });
+        .json({ message: error.details[0].message });
   }
 
   next();

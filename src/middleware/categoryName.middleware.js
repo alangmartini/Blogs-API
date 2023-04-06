@@ -1,11 +1,11 @@
 const { statusCode } = require('../errors/errors.error');
-const { registerUserSchema } = require('./validation/schema');
+const { categoryRegisterSchema } = require('./validation/schema');
 
-const categoryNameMiddleware = (req, res, next) => {
-  const { error } = registerUserSchema.validate(req.body);
+const categoryNameMiddleware = async (req, res, next) => {
+  const { error } = categoryRegisterSchema.validate(req.body);
 
   if (error) {
-    return res.status(statusCode.INVALID_REQUEST).json({ error: error.details[0].message });
+    return res.status(statusCode.INVALID_REQUEST).json({ message: error.details[0].message });
   }
 
   next();

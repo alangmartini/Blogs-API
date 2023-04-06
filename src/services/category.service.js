@@ -3,7 +3,7 @@ const { Category } = require('../models');
 
 async function createCategory(name) {
   try {
-    const category = await Category.create(name);
+    const category = await Category.create({ name });
 
     return category;
   } catch (error) {
