@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => queryInterface.createTable('PostsCategories', {
+  up: async (queryInterface, Sequelize) => queryInterface.createTable('posts_categories', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -27,6 +27,6 @@ module.exports = {
   }),
 
   down: async (queryInterface, _Sequelize) => {
-    queryInterface.dropTable('PostsCategories');
+    queryInterface.dropTable('posts_categories');
   },
 };
