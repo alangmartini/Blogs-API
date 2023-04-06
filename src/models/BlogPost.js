@@ -27,9 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     },
   }, {
-    sequelize,
-    modelName: 'BlogPost',
     tableName: 'blog_posts',
+    underscored: true,
+    timestamps: true,
+    createdAt: 'published',
+    updatedAt: 'updated',
   });
 
   BlogPost.associate = (models) => {
