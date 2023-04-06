@@ -1,5 +1,3 @@
-Category.belongsToMany(require('./BlogPost'), { through: 'posts_categories' });
-
 module.exports = (sequelize, DataTypes) => {
   const Category = sequelize.define('Category', {
     id: {
@@ -16,9 +14,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'categories',
   });
 
-  Category.associate = (models) => {
-    Category.belongsToMany(models.BlogPost, { through: 'posts_categories' });
-  };
-  
   return Category;
 };
