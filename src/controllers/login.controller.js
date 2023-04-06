@@ -4,7 +4,7 @@ const { userService } = require('../services');
 const { loginRouter } = require('../router');
 const { errorMessages } = require('../errors/errors.error');
 
-loginRouter.post('/', async (req, res) => {
+const logIn = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userService.findByEmail({ email });
@@ -23,4 +23,8 @@ loginRouter.post('/', async (req, res) => {
 
   // Return token
   return res.json({ token });
-});
+};
+
+module.exports = {
+  logIn,
+};
