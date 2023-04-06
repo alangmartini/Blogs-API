@@ -7,6 +7,9 @@ const statusCode = {
 
 const errorMessages = {
   ERROR_HASHING_PASSWORD: 'Error hashing password',
+  FIELDS_REQUIRED: 'Some required fields are missing',
+  INVALID_FIELDS: 'Invalid fields',
+  
 };
 
 module.exports = {
