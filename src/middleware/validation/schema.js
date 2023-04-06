@@ -17,7 +17,7 @@ const loginSchema = Joi.object({
   }).messages(messagesFieldsRequired);
 
 const registerUserSchema = Joi.object({
-  displayName: Joi.string().required(),
+  displayName: Joi.string().min(8).required(),
   email: Joi.string().email().min(8).required(),
   password: Joi.string().min(6).required(),
   image: Joi.string(),

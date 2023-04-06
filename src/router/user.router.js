@@ -1,10 +1,15 @@
 const express = require('express');
 const { userController } = require('../controllers');
 const { tokenAuth } = require('../auth/tokenAuth.middleware');
+const { nameEmailPassImageMiddleware } = require('../middleware/nameEmailPassImage.middleware');
 
 const router = express.Router();
 
-router.post('/', userController.register);
+router.post(
+  '/', 
+  nameEmailPassImageMiddleware,
+  userController.register,
+);
 
 router.get(
   '/', 
