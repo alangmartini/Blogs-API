@@ -70,7 +70,7 @@ const handleError = (post, user) => {
 
     if (post.userId !== user.id) {
         const error = new Error(errorMessages.UNAUTHORIZED);
-        error.statusCode = statusCode.INVALID_REQUEST;
+        error.statusCode = statusCode.UNAUTHORIZED;
 
         return error;
     }
@@ -100,9 +100,28 @@ const updatePostById = async (id, title, content, user) => {
     }
 };
 
+const deletePostById = async (id, user) => {
+    try {
+        const post = await models.BlogPost.findByPk(id);
+
+        const error = handleError(post, user);
+
+        if (error) {
+            return error;
+        }
+
+        await post.destroy();
+
+        return true;
+    } catch (error) {
+        return { statusCode: statusCode.INTERNAL_ERROR, message: error.message };
+    }
+};
+
 module.exports = { 
     createService,
     getAllPosts,
     getPostById,
     updatePostById,
+    deletePostById,
 };
