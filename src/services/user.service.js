@@ -20,7 +20,29 @@ const registerUser = async (displayName, email, password, image) => {
   }
 };
 
+const getById = async (id) => {
+  try {
+    const user = await models.User.findByPk(id);
+
+    return user;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const getAll = async () => {
+  try {
+    const users = await models.User.findAll();
+
+    return users;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 module.exports = {
   findByEmail,
   registerUser,
+  getById,
+  getAll,
 };
