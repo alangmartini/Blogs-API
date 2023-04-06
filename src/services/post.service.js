@@ -13,7 +13,7 @@ const createService = async (title, content, categoryIds, user) => {
         }
         
         const post = await models.BlogPost.create({ title, content, userId: user.id });
-
+        
         const postCategories = categoryIds
             .map((categoryId) => ({ categoryId, postId: post.id }));
 
@@ -29,8 +29,8 @@ const getAllPosts = async () => {
     try {
         const posts = await models.BlogPost.findAll({
             include: [
-                { model: models.User, exclude: ['password'] },
-                { model: models.Category, through: { attributes: [] } },
+                { model: models.User, as: 'user', attributes: { exclude: ['password'] } },
+                { model: models.Category, as: 'categories', through: { attributes: [] } },
             ],
         });
 

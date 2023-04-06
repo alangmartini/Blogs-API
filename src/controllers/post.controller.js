@@ -21,7 +21,7 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await postService.getAllService();
+        const posts = await postService.getAllPosts();
 
         if (posts.statusCode) {
             const error = posts;
@@ -38,7 +38,7 @@ const getPostById = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const post = await postService.getByIdService(id);
+        const post = await postService.getPostById(id);
 
         if (post.statusCode) {
             const error = post;
@@ -56,7 +56,7 @@ const updatePostById = async (req, res) => {
     const { title, content } = req.body;
     const { user } = req;
     try {
-        const updatedPost = await postService.updateService(id, title, content, user);
+        const updatedPost = await postService.updatePostById(id, title, content, user);
 
         if (updatedPost.statusCode) {
             const error = updatedPost;
